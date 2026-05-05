@@ -1,14 +1,4 @@
-from utils import get_available_direction,get_direction_dictionary
-
-def get_direction_and_didnt_has_wall(i,j,walls,visited,ROWS):
-    direction=get_available_direction(i,j,visited,ROWS)
-
-    available=[]
-    for dx,dy in direction:
-        dir=get_direction_dictionary[(dx,dy)]
-        if walls[i][j][dir]==False:available.append((dx,dy))
-    
-    return available
+from utils import get_direction_and_didnt_has_wall,reconstruct_path
 
 def h(i,j,final_x,final_y):
     return abs(final_x-i)+abs(final_y-j)
@@ -59,20 +49,12 @@ def algo_a_star(walls,final_x,final_y,ROWS):
         
         return do_recursive_search(final_x,final_y,visited,ROWS)
     
-    def reconstruct_path(current):
-        path = [current]
-
-        while current in came_from:
-            current = came_from[current]
-            path.append(current)
-
-        path.reverse()
-        return path
+    
     
     current=do_recursive_search(final_x,final_y,visited,ROWS)
     #print(search_order,reconstruct_path(current))
     
-    return search_order,reconstruct_path(current)
+    return search_order,reconstruct_path(current , came_from)
 
 
 
