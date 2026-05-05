@@ -1,8 +1,8 @@
 import tkinter as tk
-import random as rd
 from a_star_algoritm import algo_a_star
 from utils import grid_to_pixel,draw_square
 from generate_maze_dfs import generate_maze_dfs
+from generate_maze_prisms import generate_maze_prisms
 
 def animate_search(search_nodes, final_path , height):
     index = 0
@@ -45,7 +45,7 @@ def run_visualization(generator_fn, solver_fn , canvas, height):
             visited , walls = next(generator)
             update_canvas(canvas,visited , walls , height)
 
-            root.after(100, step_generation)
+            root.after(50, step_generation)
 
         except StopIteration:
             run_solver()
@@ -71,7 +71,7 @@ root=tk.Tk()
 root.geometry("800x800")
 root.title("Mace")
 
-ROWS=10
+ROWS=30
 walls=[[{"top":True,"bottom":True,"right":True,"left":True} for _ in range(ROWS)]for _ in range(ROWS)]
 height=800//ROWS
 
