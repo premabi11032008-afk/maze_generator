@@ -21,3 +21,26 @@ def get_available_direction(i,j,visited,ROWS):
         available.append((dx,dy))
     
     return available
+
+def grid_to_pixel(i, j , height):
+    return (j * height + height // 2, i * height + height // 2)
+
+def draw_square(x,y, canvas , height ,color="green",
+                border={"top":False,"bottom":False,"right":False,"left":False}):
+
+    x1, y1 = x - (height // 2), y - (height // 2)
+    x2, y2 = x + (height // 2), y + (height // 2)
+
+    canvas.create_rectangle(x1, y1, x2, y2, fill=color,outline="")
+
+    if border["top"]:
+        canvas.create_line(x1, y1, x2, y1)
+
+    if border["bottom"]:
+        canvas.create_line(x1, y2, x2, y2)
+
+    if border["left"]:
+        canvas.create_line(x1, y1, x1, y2)
+
+    if border["right"]:
+        canvas.create_line(x2, y1, x2, y2)
