@@ -8,6 +8,7 @@ def get_cost(i,j,final_x,final_y,g):
 
 def algo_a_star(walls,final_x,final_y,ROWS):
     nodes=[(0,0)]
+    x,y=0,0
     visited=set()
     visited.add((0,0))
 
@@ -28,13 +29,11 @@ def algo_a_star(walls,final_x,final_y,ROWS):
         return best
     
     
-    def do_recursive_search(final_x,final_y,visited,ROWS):
+    while (x,y) != (final_x,final_y):
         x,y=find_best_node(final_x,final_y)
         nodes.remove((x,y))
         search_order.append((x,y))
 
-        if (x,y)==(final_x,final_y):
-            return (x,y)
 
         for dx,dy in get_direction_and_didnt_has_wall(x,y,walls,visited,ROWS):
             nx,ny=x+dx,y+dy
@@ -46,12 +45,8 @@ def algo_a_star(walls,final_x,final_y,ROWS):
                 visited.add((nx,ny))
 
                 came_from[(nx,ny)]=(x,y)
-        
-        return do_recursive_search(final_x,final_y,visited,ROWS)
     
-    
-    
-    current=do_recursive_search(final_x,final_y,visited,ROWS)
+    current=(final_x,final_y)
     #print(search_order,reconstruct_path(current))
     
     return search_order,reconstruct_path(current , came_from)

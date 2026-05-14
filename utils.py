@@ -66,3 +66,12 @@ def reconstruct_path(current, came_from):
 
         path.reverse()
         return path
+
+def get_final_walls(generator_function,walls,ROWS):
+    maze=generator_function(walls,ROWS)
+
+    try:
+        while True:
+            visited,walls=next(maze)
+    except StopIteration:
+        return walls

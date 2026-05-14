@@ -38,7 +38,8 @@ def generate_maze_prisms(walls, ROWS):
 
         visited.add(end)
 
-        yield (visited,walls)        
+        yield (visited,walls)   
+     
 
 
 
